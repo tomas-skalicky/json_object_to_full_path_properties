@@ -1,6 +1,9 @@
 package cz.skalicky.json.tofullpathproperties.model;
 
 public class ContactInfo {
+    
+    @SuppressWarnings("unused")
+    private static final String SHOULD_NOT_BE_PROCESSED = "BANANA";
 
     private Phone privatePhone;
 

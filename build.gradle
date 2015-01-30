@@ -30,6 +30,10 @@ dependencies {
     compile "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}"
     compile "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
     
+    compile 'com.google.guava:guava:18.0'
+    
+    compile 'org.apache.commons:commons-lang3:3.3.2'
+    
     testCompile 'org.testng:testng:6.8.8'
     testCompile 'org.hamcrest:hamcrest-all:1.3'
 }

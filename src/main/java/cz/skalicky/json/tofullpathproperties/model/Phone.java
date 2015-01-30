@@ -4,7 +4,7 @@ public class Phone {
 
     private String localNumber;
 
-    private String areaCode;
+    private AreaCodeEnum areaCode;
 
     public String getLocalNumber() {
         return localNumber;
@@ -14,11 +14,11 @@ public class Phone {
         this.localNumber = localNumber;
     }
 
-    public String getAreaCode() {
+    public AreaCodeEnum getAreaCode() {
         return areaCode;
     }
 
-    public void setAreaCode(String areaCode) {
+    public void setAreaCode(AreaCodeEnum areaCode) {
         this.areaCode = areaCode;
     }
 
