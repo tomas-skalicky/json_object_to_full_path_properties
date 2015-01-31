@@ -8,7 +8,9 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -55,14 +57,15 @@ public class Main {
         return person;
     }
 
-    private static final PropertyStack propertyStack = new PropertyStack();
-    private static final List<String> fullPaths = new ArrayList<String>();
+    private static final PropertyFieldStack fieldStack = new PropertyFieldStack();
+    private static final Map<String, String> fullPathToGerman = new HashMap<String, String>();
 
     private static void generateFullPathsToConsole() {
-        propertyStack.add("tomas");
         generateFullPaths(Customer.class);
+        
+        final List<String> fullPaths = new ArrayList<>(fullPathToGerman.keySet());
         Collections.sort(fullPaths);
-        fullPaths.stream().forEach(System.out::println);
+        fullPaths.stream().map(f -> f + " ... " + fullPathToGerman.get(f)).forEach(System.out::println);
     }
 
     private static <T> void generateFullPaths(final Class<T> clazz) {
@@ -97,15 +100,15 @@ public class Main {
 
         } else {
 
-            propertyStack.add(field.getName());
+            fieldStack.add(new PropertyField(field));
 
             if (terminals.contains(fieldType) || Enum.class.isAssignableFrom(fieldType)) {
-                fullPaths.add(propertyStack.toString());
+                fullPathToGerman.put(fieldStack.toString(), fieldStack.toGermanString());
             } else {
                 generateFullPaths(fieldType);
             }
 
-            propertyStack.pollLast();
+            fieldStack.pollLast();
         }
     }
 
@@ -119,9 +122,9 @@ public class Main {
                 final Class<?> firstArgumentType = (Class<?>) ((ParameterizedType) genericType)
                         .getActualTypeArguments()[0];
 
-                propertyStack.add(field.getName() + "[0]");
+                fieldStack.add(new CollectionPropertyField(field));
                 generateFullPaths(firstArgumentType);
-                propertyStack.pollLast();
+                fieldStack.pollLast();
 
             } else {
                 throw new RuntimeException("no support of non-generic lists");

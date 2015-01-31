@@ -2,10 +2,14 @@ package cz.skalicky.json.tofullpathproperties.model;
 
 import java.util.List;
 
+import cz.skalicky.json.tofullpathproperties.German;
+
 public class Customer extends Person {
 
+    @German("kundeId")
     private Integer customerId;
 
+    @German("bestellungen")
     private List<CustomerOrder> orders;
 
     public Integer getCustomerId() {

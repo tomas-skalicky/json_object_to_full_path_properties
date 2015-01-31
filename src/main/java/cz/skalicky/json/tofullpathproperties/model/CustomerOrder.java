@@ -2,10 +2,14 @@ package cz.skalicky.json.tofullpathproperties.model;
 
 import java.math.BigDecimal;
 
+import cz.skalicky.json.tofullpathproperties.German;
+
 public class CustomerOrder {
 
+    @German("id")
     private Integer id;
 
+    @German("preis")
     private BigDecimal price;
 
     public Integer getId() {

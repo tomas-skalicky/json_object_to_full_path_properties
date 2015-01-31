@@ -1,11 +1,16 @@
 package cz.skalicky.json.tofullpathproperties.model;
 
+import cz.skalicky.json.tofullpathproperties.German;
+
 public class Person {
 
+    @German("vorname")
     private String firstName;
 
+    @German("nachname")
     private String lastName;
 
+    @German("kontaktInformationen")
     private ContactInfo contactInfo;
 
     public String getFirstName() {
